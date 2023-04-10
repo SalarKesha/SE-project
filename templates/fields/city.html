@@ -1,0 +1,12 @@
+{% load city_tags %}
+{% get_cities as cities %}
+<label class="dropdown">شهر:
+    <input id="city" type="text" name="city" onkeyup="filterFunction('city', 'cityDropdown')" class="dropbtn"
+           placeholder="شهر" autocomplete="off" required>
+    <ul id="cityDropdown" class="dropdown-content">
+
+        {% for city in cities %}
+            <li class="op" onclick="setCity({{ city }})">{{ city.name }} <span style="opacity: 0.5">({{ city.region.name }})</span></li>
+        {% endfor %}
+    </ul>
+</label>
