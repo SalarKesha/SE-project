@@ -29,6 +29,7 @@ class VisitAdmin(admin.ModelAdmin):
     list_filter = ['is_active', 'is_taken']
 
 
+
 @register(Expertise)
 class ExpertiseAdmin(admin.ModelAdmin):
     list_display = ['id', 'title']

@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'patient.apps.PatientConfig',
     'transaction.apps.TransactionConfig',
     'support.apps.SupportConfig',
+    'account.apps.AccountConfig',
+    'refund.apps.RefundConfig',
+    'visit.apps.VisitConfig',
 ]
 
 MIDDLEWARE = [
@@ -56,6 +59,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'mysite.urls'
+
+AUTH_USER_MODEL = 'account.CustomUser'
 
 TEMPLATES = [
     {

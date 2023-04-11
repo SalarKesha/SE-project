@@ -1,6 +1,8 @@
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 
+# from account.models import CustomUser
 from location.models import City
 
 
@@ -18,7 +20,7 @@ class Doctor(models.Model):
     first_name = models.CharField(max_length=32)
     last_name = models.CharField(max_length=32)
     phone_number = models.CharField(max_length=11, unique=True, blank=False, null=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='doctors')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='doctors')
     person_code = models.CharField(max_length=10)
     medical_code = models.CharField(max_length=5)
     expertise = models.ForeignKey(Expertise, on_delete=models.PROTECT, related_name='doctors')
@@ -32,7 +34,7 @@ class Doctor(models.Model):
     photo = models.ImageField(blank=True, null=True, upload_to='doctors/')
 
     def __str__(self):
-        return f"{self.user.first_name} {self.user.last_name}"
+        return f"{self.user}"
 
 
 class Visit(models.Model):
@@ -41,6 +43,7 @@ class Visit(models.Model):
     amount = models.BigIntegerField(default=0)
     is_active = models.BooleanField(default=True)
     is_taken = models.BooleanField(default=False)
+
     # city = models.CharField(max_length=32)
     # expertise = models.CharField(max_length=42)
     # office_number = models.CharField(max_length=11)
@@ -52,11 +55,9 @@ class Visit(models.Model):
 class Request(models.Model):
     NEW = 1
     ACCEPT = 2
-    REJECT = 3
     CONDITION = (
         (NEW, 'new'),
-        (ACCEPT, 'accept'),
-        (REJECT, 'reject')
+        (ACCEPT, 'accept')
     )
     first_name = models.CharField(max_length=32)
     last_name = models.CharField(max_length=32)
