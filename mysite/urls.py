@@ -14,5 +14,7 @@ urlpatterns = [
                   path('account/', include('account.urls')),
                   path('refund/', include('refund.urls')),
                   path('visit/', include('visit.urls')),
-                  path('base/', TemplateView.as_view(template_name='base/base.html'), name='base')
+                  path('', TemplateView.as_view(template_name='index.html'), name='home'),
+                  path('about/', TemplateView.as_view(template_name='static_templates/about.html'), name='about'),
+                  path('contact/', TemplateView.as_view(template_name='static_templates/contact.html'), name='contact')
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

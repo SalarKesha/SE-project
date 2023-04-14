@@ -3,20 +3,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Title{% endblock %}</title>
-    {% static 'doctor/css/common/css-reset.css' %}
+    <title>{% block title %}سامانه نوبت دهی{% endblock %}</title>
+    <link rel="icon" href="{% static 'doctor/images/logo22.png' %}">
+    <link rel="stylesheet" href="{% static 'doctor/css/common/css-reset.css' %}">
+    <link rel="stylesheet" href="{% static 'doctor/css/common/base.css' %}">
     <style>
         @font-face {
             font-family: BYekan;
-            src: url("/media/fonts/BYekan.eot") format('eot'),
-            url("/media/fonts/BYekan.woff") format('woff'),
+            src: url("/media/fonts/sans/Sans a4fran3.eot") format('eot'),
+            url("/media/fonts/sans/Sans a4fran3.woff") format('woff'),
             url("/media/fonts/BYekan.ttf") format('truetype')
         }
     </style>
     {% block style %}{% endblock %}
 </head>
-<body id="body">
+<body id="body" class="body">
 {% include 'partial/navbar.html' %}
+
 {% block content %}content ...{% endblock %}
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<footer class="footer">
+    <p class="footer-p">این وبسایت تنها به منطور تست ساخته شده است</p>
+</footer>
 </body>
 </html>

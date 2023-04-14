@@ -1,6 +1,9 @@
+from datetime import datetime
+
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
+from khayyam import *
 
 # from account.models import CustomUser
 from location.models import City
@@ -11,6 +14,9 @@ from location.models import City
 
 class Expertise(models.Model):
     title = models.CharField(max_length=42, blank=False, null=False)
+
+    def f(self):
+        return f"\'{self.title}\'"
 
     def __str__(self):
         return self.title
@@ -33,8 +39,22 @@ class Doctor(models.Model):
     modified_time = models.DateTimeField(auto_now=True)
     photo = models.ImageField(blank=True, null=True, upload_to='doctors/')
 
+    def get_fullname(self):
+        return f"{self.first_name} {self.last_name}"
+
+    def get_first_visit(self):
+        fv = self.visits.order_by('time').first()
+        # if fv:
+        #     return False
+        # time = JalaliDate(fv)
+        # return str(JalaliDate(2022, 11, 2))
+        return fv
+
+    def f(self):
+        return f"\'{self.first_name} {self.last_name}\'"
+
     def __str__(self):
-        return f"{self.user}"
+        return self.get_fullname()
 
 
 class Visit(models.Model):
@@ -49,16 +69,25 @@ class Visit(models.Model):
     # office_number = models.CharField(max_length=11)
 
     def __str__(self):
-        return f"{self.time}"
+        # now = datetime.now()
+        # print(JalaliDatetime(now))
+        date = JalaliDate(self.time).strftime('%A %d %B')
+        time = JalaliDatetime(self.time).strftime(' %H:%M ')
+        return str(date) + str(time)
+        # return datetime.
+        # return f"{self.time}"
 
 
 class Request(models.Model):
     NEW = 1
     ACCEPT = 2
+    REJECT = 3
     CONDITION = (
         (NEW, 'new'),
-        (ACCEPT, 'accept')
+        (ACCEPT, 'accept'),
+        (REJECT, 'reject')
     )
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_query_name='requests')
     first_name = models.CharField(max_length=32)
     last_name = models.CharField(max_length=32)
     phone_number = models.CharField(max_length=11)
@@ -66,7 +95,7 @@ class Request(models.Model):
     medical_code = models.CharField(max_length=12)
     expertise = models.ForeignKey(Expertise, on_delete=models.PROTECT, related_name='requests')
     office_number = models.CharField(max_length=11)
-    email = models.CharField(max_length=32)
+    email = models.EmailField()
     city = models.ForeignKey(City, on_delete=models.PROTECT, related_name='requests')
     address = models.TextField(null=True, blank=True)
     condition = models.PositiveSmallIntegerField(default=NEW, choices=CONDITION)
@@ -75,6 +104,3 @@ class Request(models.Model):
 
     def __str__(self):
         return f"{self.person_code} {self.medical_code} {self.get_condition_display()}"
-
-
-

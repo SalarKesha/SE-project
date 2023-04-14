@@ -1,0 +1,168 @@
+
+.body {
+    direction: rtl;
+    text-align: right;
+    font-family: 'BYekan';
+    position: relative;
+    /*background-color: #e1f1ff;*/
+    /*background-color: #f1f4eb;*/
+    text-decoration: none;
+    /*background-image: url("images/background1.jpg");*/
+    /*background-image: url('/doctor/static/doctor/images/background1.jpg');*/
+    background-image: url('/media/icons/background1.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    min-height: 100vh;
+}
+
+img {
+    width: 100%;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.header {
+    /*background-color: red;*/
+    /*min-height: 180px;*/
+    /*margin-bottom: 30px;*/
+}
+
+.nav {
+    height: 60px;
+    width: 75%;
+    background-color: #313131;
+    /*background-color: #3f6c8f;*/
+    /*background-color: #e1f1ff;*/
+    padding: 5px;
+    border-bottom-right-radius: 150px 80%;
+    /*border-top-right-radius: -50px 50%;*/
+    float: left;
+    /*min-width: 100%;*/
+}
+
+.logo-container {
+    /*height: 60px;*/
+    width: 23%;
+    /*background-color: red;*/
+    display: inline-block;
+    float: right;
+    text-align: center;
+}
+.logo-container:hover{
+    opacity: 0.7;
+    transition-duration: 300ms;
+}
+.logo-container a{
+    display: block;
+}
+
+.logo-p{
+    width: 60%;
+    margin: auto;
+    /*background-color: #c7c7c7;*/
+}
+.logo-i{
+    width: 85%;
+    margin: auto;
+}
+.logo h1 {
+    font-size: 18px;
+    color: #549fbe;
+    font-weight: bolder;
+    /*margin-top: 10px;*/
+    /*margin: auto;*/
+    /*background-color: red;*/
+    /*font-size: 48px;*/
+    /*padding-top: 30px;*/
+}
+
+.logo-img {
+    /*width: 100%;*/
+    /*aspect-ratio: 1/1;*/
+    width: 30%;
+    /*height: 100%;*/
+}
+
+.menu {
+    /*background-color: #c7c7c7;*/
+    text-align: center;
+    float: right;
+    padding: 15px 15% 0 0;
+
+}
+
+.menu-item {
+    /*border: 1px white solid;*/
+    color: #e1f1ff;
+    padding: 10px;
+    /*background-color: #e1f1ff;*/
+    margin-left: 20px;
+    /*border-radius: 10px;*/
+}
+
+.menu-item:hover {
+    color: #b2b2b2;
+    transition-duration: 300ms;
+}
+.account-container{
+    display: inline-block;
+    float: left;
+    border-radius: 5px;
+    width: 18%;
+    text-align: center;
+    background-color: #d2e8dd;
+    margin: 14px 0 0 20px;
+}
+.login-container {
+    display: inline-block;
+    float: left;
+    border-radius: 5px;
+    width: 10%;
+    text-align: center;
+    background-color: #d2e8dd;
+    margin: 14px 0 0 20px;
+}
+
+.login-icon {
+    width: 20px;
+    display: inline-block;
+    vertical-align: -6px;
+}
+
+.login {
+    font-size: 14px !important;
+    font-weight: bolder;
+    border-radius: 5px;
+    display: inline-block;
+    color: #494949;
+}
+
+.login-container:hover, .account-container:hover {
+    color: white;
+    background-color: #1cadc8;
+    transition-duration: 400ms;
+}
+
+/*----------------------------------------------------------*/
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    margin-top: 150px;
+    height: 60px;
+    background-color: #262626;
+    text-align: center;
+    padding-top: 30px;
+    width: 100%;
+}
+
+.footer-p {
+    color: #c7c7c7;
+}
+
+.clear {
+    clear: both;
+}

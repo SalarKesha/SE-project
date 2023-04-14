@@ -1,0 +1,14 @@
+{% load expertise_tags %}
+{% get_expertises as expertises %}
+<div class="dropdown expertise-container">
+    <label for="expertise">تخصص:</label>
+    <input autocomplete="off" id="expertise" type="text" name="expertise" onclick="rst()"
+           onkeyup="filterFunction('expertise', 'expertiseDropdown')"
+           class="dropbtn field" placeholder="همه تخصص ها">
+    <ul id="expertiseDropdown" class="dropdown-content">
+
+        {% for expertise in expertises %}
+            <li class="op" onclick="setEpertise({{ expertise.f }})">{{ expertise.title }}</li>
+        {% endfor %}
+    </ul>
+</div>

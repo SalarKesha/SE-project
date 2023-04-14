@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'visit.apps.VisitConfig',
 ]
 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

@@ -1,0 +1,14 @@
+{% load doctor_tags %}
+{% get_doctors as doctors %}
+<div class="dropdown doctor-container">
+    <label for="doctor">نام پزشک:</label>
+    <input autocomplete="off" id="doctor" type="text" name="doctor" onclick="rst()"
+           onkeyup="filterFunction('doctor', 'doctorDropdown')"
+           class="dropbtn field" placeholder="همه پزشکان">
+    <ul id="doctorDropdown" class="dropdown-content">
+
+        {% for doctor in doctors %}
+            <li class="op" onclick="setDoctor({{ doctor.f }})">{{ doctor.first_name }} {{ doctor.last_name }}</li>
+        {% endfor %}
+    </ul>
+</div>
