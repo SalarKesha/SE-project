@@ -2,9 +2,16 @@
 {% get_doctors as doctors %}
 <div class="dropdown doctor-container">
     <label for="doctor">نام پزشک:</label>
-    <input autocomplete="off" id="doctor" type="text" name="doctor" onclick="rst()"
-           onkeyup="filterFunction('doctor', 'doctorDropdown')"
-           class="dropbtn field" placeholder="همه پزشکان">
+    {% if name %}
+        <input autocomplete="off" id="doctor" type="text" name="name" onclick="rst()"
+               onkeyup="filterFunction('doctor', 'doctorDropdown')"
+               class="dropbtn field" placeholder="همه پزشکان" value="{{ name }}">
+    {% else %}
+        <input autocomplete="off" id="doctor" type="text" name="name" onclick="rst()"
+               onkeyup="filterFunction('doctor', 'doctorDropdown')"
+               class="dropbtn field" placeholder="همه پزشکان">
+    {% endif %}
+
     <ul id="doctorDropdown" class="dropdown-content">
 
         {% for doctor in doctors %}

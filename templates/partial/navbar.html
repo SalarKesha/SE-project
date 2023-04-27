@@ -16,19 +16,19 @@
             <a href="{% url 'about' %}" class="menu-item">درباره ما</a>
         </div>
         {% if request.user.is_authenticated %}
-            <div class="account-container">
-                <a href="http://127.0.0.1:8000/admin">
-                    <p class="login">حساب کاربری</p>
-                    <img class="login-icon" src="{% static 'doctor/images/user.png' %}" alt="account">
+{#            <div class="account-container">#}
+                <a href="http://127.0.0.1:8000/admin" class="account-container">
+                    <p class="login">{{ user.username }}</p>
+{#                    <img class="login-icon" src="{% static 'doctor/images/user.png' %}" alt="account">#}
                 </a>
-            </div>
+{#            </div>#}
         {% else %}
-            <div class="login-container">
-                <a href="http://127.0.0.1:8000/admin">
+{#            <div class="login-container">#}
+                <a href="http://127.0.0.1:8000/admin" class="login-container">
                     <p class="login">ورود</p>
-                    <img class="login-icon" src="{% static 'doctor/images/login.png' %}" alt="login">
+{#                    <img class="login-icon" src="{% static 'doctor/images/login.png' %}" alt="login">#}
                 </a>
-            </div>
+{#            </div>#}
         {% endif %}
 
     </nav>

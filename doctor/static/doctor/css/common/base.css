@@ -111,10 +111,15 @@ a {
     display: inline-block;
     float: left;
     border-radius: 5px;
-    width: 18%;
+    width: 14%;
     text-align: center;
     background-color: #d2e8dd;
     margin: 14px 0 0 20px;
+    background-image: url("/media/icons/user.png");
+    background-repeat: no-repeat;
+    background-size: 15px 15px;
+    background-position: 6px;
+    padding: 3px;
 }
 .login-container {
     display: inline-block;
@@ -124,24 +129,29 @@ a {
     text-align: center;
     background-color: #d2e8dd;
     margin: 14px 0 0 20px;
+    background-image: url("/media/icons/login.png");
+    background-repeat: no-repeat;
+    background-size: 15px 15px;
+    background-position: 6px;
+    padding: 3px;
+    letter-spacing: 1px;
 }
 
-.login-icon {
-    width: 20px;
-    display: inline-block;
-    vertical-align: -6px;
-}
+/*.login-icon {*/
+/*    width: 20px;*/
+/*    display: inline-block;*/
+/*    vertical-align: -6px;*/
+/*}*/
 
 .login {
     font-size: 14px !important;
     font-weight: bolder;
     border-radius: 5px;
     display: inline-block;
-    color: #494949;
+    color: #2a2a2a;
 }
 
 .login-container:hover, .account-container:hover {
-    color: white;
     background-color: #1cadc8;
     transition-duration: 400ms;
 }

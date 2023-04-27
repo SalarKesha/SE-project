@@ -20,18 +20,57 @@ class DoctorListView(ListView):
 
 def search(request):
     if request.method == 'POST':
-        doctor = request.POST.get('doctor')
+        name = request.POST.get('name')
         expertise = request.POST.get('expertise')
         city = request.POST.get('city')
-        qs = Doctor.objects.filter(city__name=city).annotate(
+        if name and expertise and city:
+            qs = Doctor.objects.filter(
+                Q(first_name__in=name.split()) | Q(last_name__in=name.split()),
+                expertise__title=expertise,
+                city__name=city
+            )
+            # city = False
+            # expertise = False
+            # name = False
+        elif expertise and city:
+            qs = Doctor.objects.filter(expertise__title=expertise, city__name=city)
+
+        elif expertise and name:
+            qs = Doctor.objects.filter(
+                Q(first_name__in=name.split()) | Q(last_name__in=name.split()),
+                expertise__title=expertise
+            )
+        elif name and city:
+            qs = Doctor.objects.filter(
+                Q(first_name__in=name.split()) | Q(last_name__in=name.split()),
+                city__name=city
+            )
+        elif name:
+            qs = Doctor.objects.filter(Q(first_name__in=name.split()) | Q(last_name__in=name.split()))
+
+        elif expertise:
+            qs = Doctor.objects.filter(expertise__title=expertise)
+        elif city:
+            qs = Doctor.objects.filter(city__name=city)
+        else:
+            qs = Doctor.objects.all()
+
+        qs = qs.annotate(
             visit_count=Count('visits__id'),
-        )
+        ).distinct()
+        paginator = Paginator(qs, 30)
+        page_number = request.POST.get('page')
+        page_obj = paginator.get_page(page_number)
+
     else:
-        qs = Doctor.objects.all().annotate(
-            visit_count=Count('visits__id'),
-        )
+        qs = Doctor.objects.all()
         city = False
-    # paginator = Paginator(qs, 30)
-    # page_number = request.GET.get('page')
-    # page_obj = paginator.get_page(page_number)
-    return render(request, 'doctor/search.html', {'page_obj': qs, 'city': city})
+        expertise = False
+        name = False
+        qs = qs.annotate(
+            visit_count=Count('visits__id'),
+        ).distinct()
+        paginator = Paginator(qs, 30)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+    return render(request, 'doctor/search.html', {'page_obj': page_obj, 'name': name, 'expertise': expertise, 'city': city})

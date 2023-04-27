@@ -2,8 +2,7 @@
 {% load static %}
 {% block style %}
     <link rel="stylesheet" href="{% static 'doctor/css/search.css' %}">
-    <link rel="stylesheet" href="{% static 'doctor/css/common/paginator.css' %}">
-    <link rel="stylesheet" href="{% static 'doctor/css/common/field.css' %}">
+        <link rel="stylesheet" href="{% static 'doctor/css/common/paginator.css' %}">
     <script src="{% static 'doctor/js/search.js' %}"></script>
 {% endblock %}
 {% block content %}
@@ -12,21 +11,10 @@
             <div class="form-container">
                 <form action="{% url 'search' %}" class="main-form" method="post">
                     {% csrf_token %}
-                    {#                    <div class="container">#}
-                    {#                        <label for="expertise">تخصص:</label>#}
-                    {#                        <input id="expertise" class="field" type="text" placeholder="همه تخصص ها" autocomplete="off">#}
-                    {#                    </div>#}
-                    {#                    <div class="container">#}
-                    {#                        <label for="name">نام پزشک:</label>#}
-                    {#                        <input id="name" class="field" type="text" placeholder="همه پزشکان" autocomplete="off">#}
-                    {#                    </div>#}
-                    {#                    <div class="container">#}
-                    {#                        <label for="city">شهر:</label>#}
-                    {#                        <input id="city" class="field" type="text" placeholder="همه شهر ها" autocomplete="off">#}
-                    {#                    </div>#}
+                    {% include 'fields/doctor.html' %}
+                    {% include 'fields/expertise.html' %}
                     {% include 'fields/city.html' %}
                     <div class="btn">
-                        <input class="reset" type="reset" value="پاک کردن">
                         <input class="submit" type="submit" value="مشاهده نتایج">
                     </div>
                 </form>
@@ -34,55 +22,76 @@
         </div>
         <div class="clear"></div>
         <div class="results-container">
-            {% for doctor in page_obj %}
-                <div class="result">
-                    <div class="result-img-container">
-                        {% if doctor.photo %}
-                            <img class="result-img" src="{{ doctor.photo.url }}" alt="img">
-                        {% else %}
-                            <img class="result-img" src="/media/icons/defdoc.png" alt="img">
-                        {% endif %}
-                    </div>
-                    <div class="result-detail">
-                        <div class="fullname">
-                            <div class="fname">{{ doctor.first_name }}</div>
-                            <div class="lname">{{ doctor.last_name }}</div>
+            {% if page_obj %}
+                {% for doctor in page_obj %}
+                    <div class="result">
+                        <div class="result-img-container">
+                            {% if doctor.photo %}
+                                <img class="result-img" src="{{ doctor.photo.url }}" alt="img">
+                            {% else %}
+                                <img class="result-img" src="/media/icons/defdoc.png" alt="img">
+                            {% endif %}
                         </div>
-                        <div class="expertise">{{ doctor.expertise }}</div>
-                        {% if doctor.get_first_visit %}
-{#                            <div class="first_visit">{{ doctor.get_first_visit.time.day }}</div>#}
-{#                            <div class="first_visit">{{ doctor.get_first_visit.time.month }}</div>#}
-{#                            <div class="first_visit">{{ doctor.get_first_visit.time.year }}</div>#}
-                            <div class="first_visit"><span>اولین نوبت آزاد مطب:</span>{{ doctor.get_first_visit }}</div>
-                        {% endif %}
-                        <div class="city">{{ doctor.city }}</div>
-                    </div>
-                    <div class="result-get">گرفتن نوبت<span> ({{ doctor.visit_count }}) </span></div>
-                </div>
-            {% endfor %}
-            <div class="paginator-container">
-                {#                <div>#}
-                {#                    page {{ page_obj.number }} of {{ p.num_pages }}#}
-                {#                </div>#}
-                <div class="paginator">
-                    <ul>
-                        {% if page_obj.has_previous %}
-                            <li><a href="?page=1">صفحه اول</a></li>
-                            <span>. .</span>
-                            <li>
-                                <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
-                            </li>
-                        {% endif %}
-                        <li class="current">{{ page_obj.number }}</li>
-                        {% if page_obj.has_next %}
-                            <li><a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
-                            <span>. .</span>
-                            <li><a href="?page={{ page_obj.paginator.num_pages }}">صفحه آخر</a></li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
+                        <div class="result-detail">
+                            <div class="fullname">
+                                <span>دکتر</span>
+                                <div class="fname">{{ doctor.first_name }}</div>
+                                <div class="lname">{{ doctor.last_name }}</div>
+                            </div>
+                            <div class="expertise">{{ doctor.expertise }}</div>
+                            {% if doctor.get_first_visit %}
+                                {#                            <div class="first_visit">{{ doctor.get_first_visit.time.day }}</div>#}
+                                {#                            <div class="first_visit">{{ doctor.get_first_visit.time.month }}</div>#}
+                                {#                            <div class="first_visit">{{ doctor.get_first_visit.time.year }}</div>#}
+                                <div class="first_visit"><span>اولین نوبت آزاد مطب: </span>{{ doctor.get_first_visit }}
+                                </div>
+                            {% endif %}
 
+                        </div>
+                        <div class="result-footer">
+                            <div class="city">{{ doctor.city }}</div>
+                            <div class="result-get"><span>گرفتن نوبت</span>
+                                <span>
+                            <svg height="10px" width="10px" version="1.1" id="Layer_1"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 viewBox="0 0 410.258 410.258" xml:space="preserve">
+<polygon style="fill:#507379;"
+         points="298.052,24 266.052,0 112.206,205.129 266.052,410.258 298.052,386.258 162.206,205.129 "/>
+</svg>
+                        </span>
+                            </div>
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                {% endfor %}
+                <div class="paginator-container">
+                    {#                <div>#}
+                    {#                    page {{ page_obj.number }} of {{ p.num_pages }}#}
+                    {#                </div>#}
+                    <div class="paginator">
+                        <ul>
+                            {% if page_obj.has_previous %}
+                                <li><a href="?page=1">صفحه اول</a></li>
+                                <span>. .</span>
+                                <li>
+                                    <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+                                </li>
+                            {% endif %}
+                            <li class="current">{{ page_obj.number }}</li>
+                            {% if page_obj.has_next %}
+                                <li><a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+                                </li>
+                                <span>. .</span>
+                                <li><a href="?page={{ page_obj.paginator.num_pages }}">صفحه آخر</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            {% else %}
+                <p class="return-null">موردی یافت نشد :(</p>
+            {% endif %}
         </div>
     </main>
 {% endblock %}
