@@ -1,0 +1,38 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'doctor/css/profile.css' %}">
+{% endblock %}
+{% block content %}
+    <main>
+        <div class="profile">
+            <div>
+                {% if doctor.photo %}
+                    <div class="photo"><img src="{{ doctor.photo.url }}" alt="photo"></div>
+                {% else %}
+                    <div class="photo"><img src="/media/icons/defdoc.png" alt="photo"></div>
+                {% endif %}
+                <div class="detail">
+                    <div class="fullname"><span>دکتر </span>{{ doctor.get_fullname }}</div>
+                    <div class="expertise">{{ doctor.expertise }}</div>
+                    <div class="city">{{ doctor.city }}</div>
+                    <div class="medical-code"><span>کد نظام پزشکی   </span>{{ doctor.medical_code }}</div>
+                </div>
+                <div class="number"><span>شماره مطب: </span>{{ doctor.office_number }}</div>
+                <div class="address"><span>آدرس مطب: </span>{{ doctor.address }}</div>
+            </div>
+        </div>
+        <div class="visits-container">
+                <div class="caption">لیست نوبت های مطب دکتر <span>{{ doctor.get_fullname }}</span></div>
+            {% if visits %}
+                <div>
+                    {% for visit in visits %}
+                        <a href="#" class="visit">{{ visit }}</a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="empty">نوبت خالی یافت نشد !</p>
+            {% endif %}
+        </div>
+    </main>
+{% endblock %}

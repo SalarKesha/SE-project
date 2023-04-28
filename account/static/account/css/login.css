@@ -1,0 +1,100 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.form-container {
+    width: 40%;
+    margin: auto;
+    max-width: 320px;
+}
+
+.login-alert {
+    text-align: center;
+    font-size: 20px;
+    padding: 16px;
+    color: #006a98;
+    font-weight: bolder;
+}
+
+.login-form {
+    border: #006a98 2px solid;
+    border-radius: 5px;
+    box-shadow: 1px 1px 8px 0 black;
+    background-color: #ffffff;
+    padding: 20px;
+    text-align: center;
+}
+
+#number, #password, #fname, #lname, #code, #pid, #mail {
+    border: none;
+    height: 35px;
+    display: block;
+    font-family: 'BYekan';
+    width: 70%;
+    padding: 8px;
+    font-size: 18px;
+    margin: 0 auto 10px auto;
+    border-radius: 5px;
+    cursor: pointer;
+    input-security: none;
+    box-decoration-break: clone;
+    outline: 1px #6b6b6b solid;
+}
+
+#number:focus, #password:focus, #fname:focus, #lname:focus {
+    outline: 2px #495bb9 solid;
+}
+
+.submit {
+    width: 50%;
+    height: 36px;
+    font-family: 'BYekan';
+    font-size: 16px;
+    background-color: #006a98;
+    color: #e1f1ff;
+    border-radius: 10px;
+    border: none;
+}
+
+.submit:hover {
+    background-color: #004867;
+    transition-duration: 300ms;
+}
+
+.redirect {
+    padding: 10px;
+    color: #487bb7;
+}
+
+.redirect a {
+    padding: 8px;
+    color: #487bb7;
+}
+
+.redirect a:hover {
+    color: #021938;
+    transition-duration: 350ms;
+}
+.messages{
+    width: 100%;
+}
+.messages .error{
+    color: red;
+    padding: 10px;
+}
+.messages .success{
+    color: forestgreen;
+    padding: 10px;
+}

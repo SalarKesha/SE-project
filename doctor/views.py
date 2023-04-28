@@ -73,4 +73,14 @@ def search(request):
         paginator = Paginator(qs, 30)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
-    return render(request, 'doctor/search.html', {'page_obj': page_obj, 'name': name, 'expertise': expertise, 'city': city})
+    return render(request, 'doctor/search.html',
+                  {'page_obj': page_obj, 'name': name, 'expertise': expertise, 'city': city})
+
+
+def profile(request, pk):
+    try:
+        doctor = Doctor.objects.get(pk=pk)
+    except Doctor.DoesNotExist:
+        raise 404
+    visits = doctor.visits.all().order_by('time')
+    return render(request, 'doctor/profile.html', {'doctor': doctor, 'visits': visits})

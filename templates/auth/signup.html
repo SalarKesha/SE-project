@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'account/css/login.css' %}">
+{% endblock %}
+{% block content %}
+    <main class="main">
+        <div class="form-container">
+            <div class="login-alert">ثبت نام در سامانه</div>
+            <div class="login-form">
+                <form method="post">
+                    {% csrf_token %}
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <label for="fname">
+                        <input name="fname" id="fname" type="text" placeholder="نام" required autocomplete="off">
+                    </label>
+                    <label for="lname">
+                        <input autocomplete="off" name="lname" id="lname" type="text" placeholder="نام خانوادگی"
+                               required>
+                    </label>
+                    <label for="number">
+                        <input autocomplete="off" maxlength="11" name="phone_number" id="number" type="number"
+                               placeholder="شماره موبایل" required>
+                    </label>
+                    <label for="password">
+                        <input name="password" id="password" type="password" placeholder="رمز عبور" required>
+                    </label>
+                    <input type="submit" class="submit" value="ثبت نام">
+                </form>
+                <div class="redirect">
+                    <a href="{% url 'login' %}" class="forget">حساب کاربری دارید؟</a>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

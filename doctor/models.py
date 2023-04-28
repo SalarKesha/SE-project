@@ -72,7 +72,8 @@ class Visit(models.Model):
         # now = datetime.now()
         # print(JalaliDatetime(now))
         date = JalaliDate(self.time).strftime('%A %D %B')
-        time = JalaliDatetime(self.time).strftime(' %h:%v ')
+        # time = JalaliDatetime(self.time).strftime(' %h:%v ')
+        time = JalaliDatetime(self.time).strftime(' %H:%M ')
         return str(date) + str(time)
         # return datetime.
         # return f"{self.time}"
