@@ -7,6 +7,7 @@
     <link rel="icon" href="{% static 'doctor/images/logo22.png' %}">
     <link rel="stylesheet" href="{% static 'doctor/css/common/css-reset.css' %}">
     <link rel="stylesheet" href="{% static 'doctor/css/common/base.css' %}">
+    <script src="{% static 'doctor/js/jquery.min.js' %}"></script>
     <style>
         @font-face {
             font-family: BYekan;
@@ -14,10 +15,45 @@
             url("/media/fonts/shabnam/Farsi-Digits/Shabnam-FD.woff") format('woff'),
             url("/media/fonts/shabnam/Farsi-Digits/Shabnam-FD.ttf") format('truetype');
         }
+
+        .alert-container {
+            display: none;
+            z-index: 1000;
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            top: 2vh;
+        }
+
+        .alert-container .success {
+            width: 26%;
+            outline: 2px #75ad73 solid;
+            border-radius: 8px;
+            padding: 30px;
+            background-color: #c1eac0;
+            color: #437a41;
+            margin: auto;
+            font-size: 20px;
+            font-weight: bold;
+            {#box-shadow: 0 0 10px #99ff99;#}
+        }
+
+        .show-alert {
+            display: block;
+        }
     </style>
     {% block style %}{% endblock %}
 </head>
 <body id="body" class="body">
+<div class="alert-container show-alert" id="alert-container" onclick="delalert()">
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success success' %}
+                <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</div>
 {% include 'partial/navbar.html' %}
 
 {% block content %}content ...{% endblock %}
@@ -31,4 +67,13 @@
     <p class="footer-p">این وبسایت تنها به منطور تست ساخته شده است</p>
 </footer>
 </body>
+<script>
+    function delalert() {
+        $(".alert-container").fadeOut(1000).delay(1000);
+    }
+
+    window.onload = (event) => {
+        setTimeout(delalert, 2000);
+    };
+</script>
 </html>

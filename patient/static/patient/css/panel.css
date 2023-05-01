@@ -1,0 +1,98 @@
+a {
+    color: #062f65;
+}
+
+.main {
+    width: 100%;
+    position: relative;
+}
+
+.aside {
+    padding: 12px 32px;
+    position: static;
+    width: 15%;
+    right: 0;
+    background-color: rgba(239, 239, 239, 0.43);
+    /*height: 500px;*/
+    border-radius: 8px 0 0 8px;
+    display: inline-block;
+    /*outline: #159fb7 1px solid;*/
+}
+
+.aside ul span {
+    color: #08778a;
+    font-size: 20px;
+}
+
+.aside ul {
+    margin-top: 22px;
+}
+
+.aside li {
+    text-indent: 5%;
+    font-size: 18px;
+    line-height: 32px;
+}
+
+li a {
+    color: #159fb7;
+}
+
+li a:hover {
+    color: #076e80;
+    transition-duration: 200ms;
+}
+
+.logout-container {
+    width: 100%;
+    margin-top: 36px;
+    text-align: center;
+    background-image: url("/media/icons/logout (1).png");
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+    background-position: right;
+
+}
+
+.logout-panel {
+    color: #ff2b37;
+    font-size: 14px;
+}
+
+.content {
+    height: 400px;
+    display: inline-block;
+    text-align: center;
+    width: 80%;
+
+}
+table{
+    margin: auto;
+    box-sizing: border-box;
+    /*border-radius: 8px;*/
+}
+th{
+    padding: 8px;
+    /*outline: #1594ab 2px solid;*/
+    color: #3d3d3d;
+    font-weight: bolder;
+}
+thead tr{
+    background-color: #1cadc8;
+    outline: #1c4a72 1px solid;
+    /*border-radius: 8px 8px 0 0;*/
+    /*border: #1594ab 2px solid;*/
+    /*border-bottom: 3px solid black;*/
+}
+tbody tr{
+    /*border-radius: 8px;*/
+    /*outline: 1px solid #575757;*/
+    /*box-sizing: border-box;*/
+    border-bottom: #313131 1px solid;
+
+}
+td{
+    padding: 16px;
+    color: #1c4a72;
+    /*border-bottom: #313131 1px solid;*/
+}

@@ -9,6 +9,6 @@ from visit.models import PatientVisit
 
 @register(PatientVisit)
 class PatientVisitAdmin(admin.ModelAdmin):
-    list_display = ['id', 'patient', 'visit', 'is_visited']
+    list_display = ['id', 'patient', 'visit', 'condition']
     search_fields = ['id', 'patient__phone_number', 'visit__id', 'visit__doctor_id']
-    list_filter = ['is_visited']
+    list_filter = ['condition']

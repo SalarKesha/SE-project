@@ -119,19 +119,20 @@ a {
     /*background-repeat: no-repeat;*/
     /*background-size: 15px 15px;*/
     /*background-position: 6px;*/
-    padding: 3px;
+    /*padding: 3px;*/
 }
 .login-container {
     display: inline-block;
     float: left;
     border-radius: 5px;
     width: 8%;
+    /*height: 25px;*/
     text-align: center;
     background-color: #d2e8dd;
     margin: 14px 0 0 20px;
     background-image: url("/media/icons/login.png");
     background-repeat: no-repeat;
-    background-size: 15px 15px;
+    background-size: 18px 18px;
     background-position: 6px;
     padding: 3px;
     letter-spacing: 1px;
@@ -167,7 +168,7 @@ a {
     background-repeat: no-repeat;
     background-size: 15px 15px;
     background-position: 6px;
-    /*padding: 3px;*/
+    padding: 3px;
     letter-spacing: 1px;
 }
 .logout{
@@ -200,3 +201,14 @@ a {
 .clear {
     clear: both;
 }
+
+/*.alert{*/
+/*    width: 50%;*/
+/*    outline: 1px green solid;*/
+/*    border-radius: 15px;*/
+/*    text-align: center;*/
+/*    position: absolute;*/
+/*    top: 20vh;*/
+/*    padding: 20px;*/
+/*    background-color: rgba(70, 204, 90, 0.34);*/
+/*}*/

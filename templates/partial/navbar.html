@@ -36,7 +36,7 @@
 	                C221.831,238.968,236.999,254.374,256.003,254.374z"/>
                 </svg>
                 </a>
-                <a href="http://127.0.0.1:8000/admin" class="name">
+                <a href="{% url 'patient_panel' request.user.id %}" class="name">
                     <p class="login">{{ user.username }}</p>
                 </a>
             </div>

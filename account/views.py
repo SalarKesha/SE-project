@@ -43,16 +43,17 @@ def login_user(request):
         phone_number = request.POST.get('phone_number')
         password = request.POST.get('password')
         user = authenticate(request, username=phone_number, password=password)
-        is_login = login(request, user)
         if user:
+            login(request, user)
             messages.success(request, 'با موفقیت وارد شدید', 'success')
         else:
             messages.error(request, 'شماره موبایل و یا رمز عبور صحیح نمی باشد!', 'error')
-        return redirect('login')
+        return redirect('patient_panel', request.user.id)
     else:
         return render(request, 'auth/login.html')
 
 
 def logout_user(request):
     logout(request)
+    messages.success(request, 'از حساب خود خارج شدید', 'success')
     return redirect('home')

@@ -1,0 +1,62 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'patient/css/panel.css' %}">
+{% endblock %}
+{% block content %}
+    <main class="main">
+        <aside class="aside">
+            <ul><span>نوبت ها</span>
+                <li><a href="#">نوبت های در انتظار</a></li>
+                <li><a href="#">نوبت های ویزیت شده</a></li>
+                <li><a href="#">تاریخچه همه نوبت ها</a></li>
+                <li></li>
+            </ul>
+            <ul><span>پشتیبانی</span>
+                <li><a href="#">درخواست پشتیبانی</a></li>
+                <li><a href="#">لیست پیام ها</a></li>
+                <li></li>
+            </ul>
+            <ul><span>حساب کاربری</span>
+                <li><a href="#">مشخصات فردی</a></li>
+                <li><a href="#">تغییر کلمه عبور</a></li>
+                <li></li>
+            </ul>
+            <div class="logout-container"><a class="logout-panel" href="{% url 'logout' %}">خروج از حساب</a></div>
+        </aside>
+        <div class="content">
+            <table>
+                <thead>
+                <tr>
+                    <th>شماره</th>
+                    <th>زمان</th>
+                    <th>عنوان تخصص</th>
+                    <th>نام پزشک</th>
+                    <th>شماره مطب</th>
+                    <th>آدرس مطب</th>
+                    <th>وضعیت</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for visit in visits %}
+                    <tr>
+                        <td>{{ visit.visit.id }} -</td>
+                        <td>{{ visit.visit }}</td>
+                        <td>{{ visit.visit.doctor.expertise }}</td>
+                        <td>{{ visit.visit.doctor.get_fullname }}</td>
+                        <td>{{ visit.visit.doctor.office_number }}</td>
+                        <td>{{ visit.visit.doctor.address }}</td>
+                        {% if visit.condition == 1 %}
+                            <td>در انتظار</td>
+                        {% elif visit.condition == 2 %}
+                            <td>ویزیت شده</td>
+                        {% else %}
+                            <td>عودت داده شده</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+{% endblock %}
