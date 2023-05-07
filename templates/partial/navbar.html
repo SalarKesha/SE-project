@@ -36,9 +36,15 @@
 	                C221.831,238.968,236.999,254.374,256.003,254.374z"/>
                 </svg>
                 </a>
-                <a href="{% url 'patient_panel' request.user.id %}" class="name">
-                    <p class="login">{{ user.username }}</p>
-                </a>
+                {% if user.role == 1 %}
+                    <a href="{% url 'patient_panel' request.user.id %}" class="name">
+                        <p class="login">{{ user.username }}</p>
+                    </a>
+                {% else %}
+                    <a href="{% url 'doctor_panel' request.user.id %}" class="name">
+                        <p class="login">{{ user.username }}</p>
+                    </a>
+                {% endif %}
             </div>
         {% else %}
             <a href="{% url 'login' %}" class="login-container">

@@ -1,0 +1,6 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    {% for doctor in doctors %}
+        <p><a href="{% url 'doctor_expertise' epk=doctor.expertise_id upk=doctor.user_id%}">{{ doctor.expertise }}</a></p>
+    {% endfor %}
+{% endblock %}

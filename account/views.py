@@ -1,13 +1,13 @@
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
-from django.http import HttpResponse
+from django.contrib.auth.models import User
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
 
 from account.models import CustomUser
 
 
-# Create your views here.
 def signup(request):
     if request.method == 'POST':
         first_name = request.POST.get('fname')
@@ -44,13 +44,18 @@ def login_user(request):
         password = request.POST.get('password')
         user = authenticate(request, username=phone_number, password=password)
         if user:
+            role = CustomUser.objects.get(username=phone_number).role
             login(request, user)
             messages.success(request, 'با موفقیت وارد شدید', 'success')
-        else:
-            messages.error(request, 'شماره موبایل و یا رمز عبور صحیح نمی باشد!', 'error')
-        return redirect('patient_panel', request.user.id)
-    else:
-        return render(request, 'auth/login.html')
+            if role == 1:
+                return redirect('patient_panel', request.user.id)
+            elif role == 2:
+                return redirect('doctor_panel', request.user.id)
+            else:
+                raise Http404
+
+        messages.error(request, 'شماره موبایل و یا رمز عبور صحیح نمی باشد!', 'error')
+    return render(request, 'auth/login.html')
 
 
 def logout_user(request):

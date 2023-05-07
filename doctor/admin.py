@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.admin import register
 from django.contrib.auth.models import User
 
+from account.models import CustomUser
 from doctor.models import Doctor, Expertise, Request, Visit
 
 
@@ -29,24 +30,24 @@ class VisitAdmin(admin.ModelAdmin):
     list_filter = ['is_active', 'is_taken']
 
 
-
 @register(Expertise)
 class ExpertiseAdmin(admin.ModelAdmin):
     list_display = ['id', 'title']
     search_fields = ['title']
 
+
 # @admin.action(description='Accept')
 # def accept(modeladmin, request, queryset):
 #     queryset.update(condition=2)
 #     for req in queryset:
-#         password =
-#         User.objects.create(
-#             username=req.phone_number,
-#             first_name=req.first_name,
-#             last_name=req.last_name,
-#             password=User.objects.make_random_password()
+#         password = CustomUser.objects.make_random_password(length=8)
+#         user = CustomUser.objects.get(username=user.password).update(
+#             password=password,
+#             role=2
 #         )
+#         # send_notif(user.username, user.password)
 #         Doctor.objects.create(
+#             user=user,
 #             first_name=req.first_name,
 #             last_name=req.last_name,
 #             person_code=req.person_code,
@@ -57,7 +58,6 @@ class ExpertiseAdmin(admin.ModelAdmin):
 #             email=req.email,
 #             city=req.city,
 #             address=req.address,
-#             password="00000000",
 #         )
 #
 #

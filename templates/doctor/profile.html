@@ -2,6 +2,30 @@
 {% load static %}
 {% block style %}
     <link rel="stylesheet" href="{% static 'doctor/css/profile.css' %}">
+{#    <style>#}
+{#        .visits-container {#}
+{#            width: 40%;#}
+{#        }#}
+{##}
+{#        .profile {#}
+{#            width: 50%;#}
+{#        }#}
+{##}
+{#        .medical-code {#}
+{#            background-image: url("/media/icons/verified.png");#}
+{#            background-repeat: no-repeat;#}
+{#            background-position: right;#}
+{#            background-size: 22px 22px;#}
+{#            padding: 10px 28px 10px 10px;#}
+{#            color: #565656;#}
+{#            font-weight: bold;#}
+{#            margin-top: 20px;#}
+{#            outline: 1px #3051a6 dashed;#}
+{#            border-radius: 20px;#}
+{#            margin-right: 20px;#}
+{#        }#}
+{##}
+{#    </style>#}
 {% endblock %}
 {% block content %}
     <main>
@@ -23,7 +47,7 @@
             </div>
         </div>
         <div class="visits-container">
-                <div class="caption">لیست نوبت های مطب دکتر <span>{{ doctor.get_fullname }}</span></div>
+            <div class="caption">لیست نوبت های مطب دکتر <span>{{ doctor.get_fullname }}</span></div>
             {% if visits %}
                 <div>
                     {% for visit in visits %}

@@ -1,14 +1,17 @@
+from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.db.models import *
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
 
+from account.models import CustomUser
 from doctor.models import Doctor
 
 
 def test(request):
-    return render(request, 'base/base.html')
+    password = CustomUser.objects.make_random_password(length=8)
+    return HttpResponse(password)
 
 
 class DoctorListView(ListView):
@@ -84,3 +87,14 @@ def profile(request, pk):
         raise 404
     visits = doctor.visits.all().order_by('time')
     return render(request, 'doctor/profile.html', {'doctor': doctor, 'visits': visits})
+
+
+def doctor_panel(request, pk):
+    user = CustomUser.objects.get(id=pk)
+    doctors = user.doctors.all()
+    return render(request, 'doctor/doctor_panel.html', {'doctors': doctors})
+
+
+def doctor_expertise(request, upk, epk):
+    doctor = Doctor.objects.filter(user_id=upk, expertise_id=epk).first()
+    return render(request, 'doctor/doctor_expertise.html', {'doctor': doctor})
