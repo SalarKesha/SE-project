@@ -1,11 +1,13 @@
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
+from django.db import transaction
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
 
 from account.models import CustomUser
+from patient.models import Patient
 
 
 def signup(request):
@@ -15,16 +17,23 @@ def signup(request):
         phone_number = request.POST.get('phone_number')
         password = request.POST.get('password')
         try:
-            CustomUser.objects.create_user(
-                first_name=first_name,
-                last_name=last_name,
-                username=phone_number,
-                password=password,
-            )
+            with transaction.atomic():
+                user = CustomUser.objects.create_user(
+                    first_name=first_name,
+                    last_name=last_name,
+                    username=phone_number,
+                    password=password,
+                )
+                Patient.objects.create(
+                    first_name=first_name,
+                    last_name=last_name,
+                    user=user,
+                    phone_number=phone_number
+                )
             messages.success(request, 'ثبت نام با موفقیت انجام شد', 'success')
             return redirect('login')
         except:
-            messages.error(request, 'کاربری با این شماره موبایل ثبت نام کرده است', 'error')
+            messages.error(request, 'اطلاعات وارد شده صحیح نمی باشد!', 'error')
             return redirect('signup')
         # user = authenticate(request, username=phone_number, password=password)
         # login(request, user)

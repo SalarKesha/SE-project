@@ -1,3 +1,5 @@
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.db.models import *
@@ -6,7 +8,11 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView
 
 from account.models import CustomUser
-from doctor.models import Doctor
+from doctor.models import Doctor, Request, Expertise, Visit
+from doctor.utils import fix_datetime, set_visit
+# from doctor.utils import validate
+from location.models import City
+from transaction.models import DoctorBalance
 
 
 def test(request):
@@ -89,12 +95,58 @@ def profile(request, pk):
     return render(request, 'doctor/profile.html', {'doctor': doctor, 'visits': visits})
 
 
+@login_required(login_url='/login/')
+# @user_passes_test(validate(request=request), login_url='/login/',)
 def doctor_panel(request, pk):
     user = CustomUser.objects.get(id=pk)
     doctors = user.doctors.all()
     return render(request, 'doctor/doctor_panel.html', {'doctors': doctors})
 
 
+@login_required(login_url='/login/')
 def doctor_expertise(request, upk, epk):
     doctor = Doctor.objects.filter(user_id=upk, expertise_id=epk).first()
-    return render(request, 'doctor/doctor_expertise.html', {'doctor': doctor})
+    if request.method == 'POST':
+        set_visit(request, doctor)
+    visits = doctor.visits.all().order_by('time')
+    try:
+        balance = DoctorBalance.record_doctor_balance(doctor=doctor)
+    except:
+        balance = False
+    return render(request, 'doctor/doctor_expertise.html', {'doctor': doctor, 'visits': visits, 'balance': balance})
+
+
+@login_required(login_url='/login/')
+def doctor_request(request):
+    if request.method == 'POST':
+        try:
+            first_name = request.POST.get('fname')
+            last_name = request.POST.get('lname')
+            medical_code = request.POST.get('code')
+            person_code = request.POST.get('pid')
+            phone_number = request.POST.get('number')
+            office_number = request.POST.get('onumber')
+            address = request.POST.get('address')
+            email = request.POST.get('email')
+            photo = request.POST.get('photo')
+            user = CustomUser.objects.filter(username=phone_number).first()
+            city = City.objects.get(name=request.POST.get('city'))
+            expertise = Expertise.objects.get(title=request.POST.get('expertise'))
+            Request.objects.create(
+                user=user, first_name=first_name, last_name=last_name, medical_code=medical_code,
+                person_code=person_code,
+                city=city, expertise=expertise, phone_number=phone_number, office_number=office_number, address=address,
+                email=email, photo=photo
+            )
+            messages.success(request, 'درخواست با موفقیت ثبت شد', 'success')
+            # return redirect('home')
+        except:
+            # messages.error(request, 'اطلاعات را به درستی وارد کنید', 'error')
+            messages.success(request, 'اطلاعات را به درستی وارد کنید', 'success')
+
+    return render(request, 'doctor/request.html',
+                  {'phone_number': request.user.username, 'fname': request.user.first_name,
+                   'lname': request.user.last_name})
+
+
+

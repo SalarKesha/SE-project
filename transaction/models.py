@@ -43,7 +43,7 @@ class DoctorBalance(models.Model):
     @classmethod
     def record_doctor_balance(cls, doctor):
         positive_transactions = Sum('visits__transactions__amount')
-        negative_transactions = Sum('refunds__amount')
+        negative_transactions = Sum('visits__patient_visits__refunds__patient_visit__visit__amount')
         doctor_visits = doctor.transactions.all().aggregate(
             balance=Coalesce(positive_transactions, 0)
         )

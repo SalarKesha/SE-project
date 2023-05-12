@@ -8,10 +8,10 @@
             <img src="{% static 'doctor/images/logo22.png' %}" alt="logo" class="logo-img">
         </a>
     </div>
-    <nav class="nav">
+    <nav class="navbar">
         <div class="menu">
             <a href="#" class="menu-item">پشتیبانی</a>
-            <a href="#" class="menu-item">ثبت پزشک</a>
+            <a href="{% url 'doctor_request' %}" class="menu-item">ثبت پزشک</a>
             <a href="{% url 'contact' %}" class="menu-item">تماس با ما</a>
             <a href="{% url 'about' %}" class="menu-item">درباره ما</a>
         </div>
@@ -37,11 +37,11 @@
                 </svg>
                 </a>
                 {% if user.role == 1 %}
-                    <a href="{% url 'patient_panel' request.user.id %}" class="name">
+                    <a href="{% url 'patient_panel' request.user.id %}" class="name-btn">
                         <p class="login">{{ user.username }}</p>
                     </a>
                 {% else %}
-                    <a href="{% url 'doctor_panel' request.user.id %}" class="name">
+                    <a href="{% url 'doctor_panel' request.user.id %}" class="name-btn">
                         <p class="login">{{ user.username }}</p>
                     </a>
                 {% endif %}

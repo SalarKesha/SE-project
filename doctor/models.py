@@ -25,7 +25,7 @@ class Expertise(models.Model):
 class Doctor(models.Model):
     first_name = models.CharField(max_length=32)
     last_name = models.CharField(max_length=32)
-    phone_number = models.CharField(max_length=11, unique=True, blank=False, null=False)
+    phone_number = models.CharField(max_length=11, blank=False, null=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='doctors')
     person_code = models.CharField(max_length=10)
     medical_code = models.CharField(max_length=5)
@@ -93,7 +93,7 @@ class Request(models.Model):
     last_name = models.CharField(max_length=32)
     phone_number = models.CharField(max_length=11)
     person_code = models.CharField(max_length=10)
-    medical_code = models.CharField(max_length=12)
+    medical_code = models.CharField(max_length=5)
     expertise = models.ForeignKey(Expertise, on_delete=models.PROTECT, related_name='requests')
     office_number = models.CharField(max_length=11)
     email = models.EmailField()

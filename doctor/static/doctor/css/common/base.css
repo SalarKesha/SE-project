@@ -30,7 +30,7 @@ a {
     /*margin-bottom: 30px;*/
 }
 
-.nav {
+.navbar {
     height: 60px;
     width: 75%;
     background-color: #313131;
@@ -152,12 +152,12 @@ a {
     color: #2a2a2a;
 }
 
-.login-container:hover, .name:hover {
+.login-container:hover, .name-btn:hover {
     background-color: #1cadc8;
     transition-duration: 400ms;
 }
 
-.name{
+.name-btn{
     display: inline-block;
     border-radius: 5px;
     width: 80%;

@@ -1,0 +1,89 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'doctor/css/request.css' %}">
+    <script src="{% static 'doctor/js/request.js' %}"></script>
+{% endblock %}
+{% block content %}
+    <main class="main">
+        <div class="request-container">
+            <div class="request-caption">درخواست ثبت پزشک</div>
+            <div class="request-form">
+                <form class="main-form" method="post">
+                    {% csrf_token %}
+                    <div>
+                        <label for="fname">نام:</label>
+                        <input readonly value="{{ fname }}" id="fname" type="text" placeholder="نام" required
+                               autocomplete="off" name="fname">
+                    </div>
+                    <div>
+                        <label for="lname">نام خانوادگی:</label>
+                        <input readonly value="{{ lname }}" id="lname" type="text" placeholder="نام خانوادگی" required
+                               autocomplete="off" name="lname">
+                    </div>
+                    <div>
+                        <label for="code">کد نظام پزشکی:</label>
+                        <input id="code" type="text" placeholder="کد نظام پزشکی" required autocomplete="off"
+                               name="code">
+                    </div>
+                    <div>
+                        <label for="pid">کد ملی:</label>
+                        <input id="pid" type="number" placeholder="کد ملی" required autocomplete="off" name="pid">
+                    </div>
+                    <div class="dropdown city-container">
+                        {% load city_tags %}
+                        {% get_cities as cities %}
+                        <label for="city">شهر:</label>
+                        <input autocomplete="off" placeholder="شهر" id="city" type="text" name="city"
+                               onkeyup="filterFunction('city', 'cityDropdown')" class="dropbtn field"
+                               onclick="rst()">
+                        <ul id="cityDropdown" class="dropdown-content">
+                            {% for city in cities %}
+                                <li class="op" onclick="setCity({{ city.f }})">{{ city.name }} <span
+                                        style="opacity: 0.5">({{ city.region.name }})</span></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="dropdown expertise-container">
+                        {% load expertise_tags %}
+                        {% get_expertises as expertises %}
+                        <label for="expertise">تخصص:</label>
+                        <input autocomplete="off" id="expertise" type="text" name="expertise" onclick="rst()"
+                               onkeyup="filterFunction('expertise', 'expertiseDropdown')"
+                               class="dropbtn field" placeholder="تخصص">
+                        <ul id="expertiseDropdown" class="dropdown-content">
+                            {% for expertise in expertises %}
+                                <li class="op" onclick="setEpertise({{ expertise.f }})">{{ expertise.title }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div>
+                        <label for="number">شماره موبایل:</label>
+                        <input readonly value="{{ phone_number }}" id="number" type="number" placeholder="شماره موبایل"
+                               required autocomplete="off" name="number">
+                    </div>
+                    <div>
+                        <label for="onumber">شماره مطب:</label>
+                        <input id="onumber" type="number" placeholder="شماره مطب" required autocomplete="off"
+                               name="onumber">
+                    </div>
+                    <div>
+                        <label for="mail">ایمیل:</label>
+                        <input id="mail" type="email" placeholder="ایمیل" required autocomplete="off" name="email">
+                    </div>
+                    <div>
+                        <label for="address">آدرس مطب:</label>
+                        <textarea autocomplete="off" id="address" dir="rtl" class="textarea" required name="address">
+                    </textarea>
+                    </div>
+                    <div>
+                        <label for="photo" class="photo">بارگزاری تصویر:</label>
+                        <input type="file" id="photo" accept="image/*" name="photo">
+                    </div>
+                    <input type="submit" class="submit" value="ثبت درخواست">
+                </form>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

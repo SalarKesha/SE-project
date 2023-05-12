@@ -1,6 +1,17 @@
 {% extends 'base/base.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'doctor/css/doctor_panel.css' %}">
+    <style>
+
+    </style>
+{% endblock %}
 {% block content %}
     {% for doctor in doctors %}
-        <p><a href="{% url 'doctor_expertise' epk=doctor.expertise_id upk=doctor.user_id%}">{{ doctor.expertise }}</a></p>
+        <div class="expertise-container">
+            <a href="{% url 'doctor_expertise' epk=doctor.expertise_id upk=doctor.user_id %}">
+                <h3>{{ doctor.expertise }}</h3>
+            </a>
+        </div>
     {% endfor %}
 {% endblock %}
