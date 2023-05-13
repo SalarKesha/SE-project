@@ -1,0 +1,108 @@
+.clear{
+    clear: both;
+}
+.send-message{
+    margin-top: 80px;
+    float: right;
+    width: 25%;
+    background-color: rgba(9, 9, 9, 0.76);
+    padding: 12px;
+    border-radius: 12px 0 0 12px;
+}
+.send-message .caption{
+    font-size: 24px;
+    text-align: center;
+    color: #e8e8e8;
+    /*padding-right: 5%;*/
+    margin-bottom: 20px;
+}
+.form{
+    text-align: center;
+}
+.form input{
+    display: block;
+}
+.form #title, .form #content{
+    border: none;
+    margin: auto auto 16px auto;
+    width: 80%;
+    outline: 1px gray solid;
+    border-radius: 6px;
+    max-width: 80%;
+    font-family: 'BYekan';
+    padding: 8px;
+}
+.form #title{
+    font-size: 22px;
+    height: 42px;
+}
+.form #content{
+    min-height: 150px;
+    font-size: 20px;
+}
+.form .submit{
+    border: none;
+    height: 32px;
+    border-radius: 6px;
+    color: white;
+    background-color: #006a98;
+    padding: 4px;
+    font-family: 'BYekan';
+    margin: auto;
+    width: 30%;
+    cursor: pointer;
+}
+.form .submit:hover{
+    color: #c7c7c7;
+    background-color: #00486b;
+    transition-duration: 250ms;
+
+}
+.message-container{
+    margin: auto;
+    float: left;
+    width: 70%;
+}
+.message{
+    padding: 12px;
+    margin-bottom: 24px;
+}
+.detail{
+    float: right;
+    width: 45%;
+    /*background-color: rgba(194, 194, 194, 0.41);*/
+    background-color: #f1f1f1;
+    padding: 12px;
+    border-radius: 16px 0 16px 16px;
+    outline: #d3d3d3 3px solid;
+}
+.detail:hover{
+    /*background-color: rgba(173, 173, 173, 0.64);*/
+    transition-duration: 250ms;
+}
+.title{
+    margin-bottom: 12px;
+    font-size: 22px;
+    width: 100%;
+    /*font-weight: bold;*/
+    color: #626262;
+}
+.content{
+    border-top: 2px solid #989898;
+    padding-top: 12px;
+    text-align: justify;
+    color: #626262;
+
+}
+.response{
+    margin-top: 48px;
+    float: left;
+    width: 45%;
+    background-color: rgba(21, 131, 152, 0.56);
+    border-radius: 16px 16px 16px 0;
+    padding: 12px;
+    color: #1b4c5e;
+    outline: 2px solid #447283;
+    text-align: justify;
+    font-size: 20px;
+}

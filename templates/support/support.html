@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'support/css/support.css' %}">
+{% endblock %}
+{% block content %}
+    <main>
+        <div class="send-message">
+            <h3 class="caption">پیام جدید</h3>
+            <form class="form" method="post">
+                {% csrf_token %}
+                <label for="title"></label>
+                <input required placeholder="عنوان" name="title" id="title" type="text">
+                <label for="content"></label>
+                <textarea required placeholder="متن پیام" name="content" id="content"></textarea>
+                <input class="submit" type="submit" value="ارسال پیام">
+            </form>
+        </div>
+        <div class="message-container">
+            {% for message in messages %}
+                <div class="message">
+                    <details class="detail">
+                        <summary class="title">{{ message.title }}</summary>
+                        <p class="content">{{ message.content }}</p>
+                    </details>
+                    {% if message.response %}
+                        <p class="response">{{ message.response }}</p>
+                    {% endif %}
+                    <div class="clear"></div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="clear"></div>
+    </main>
+{% endblock %}

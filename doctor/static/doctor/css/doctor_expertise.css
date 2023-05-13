@@ -3,31 +3,6 @@ a {
     color: #2a2a2a;
 }
 
-
-.expertise-container {
-    width: 50%;
-    margin: auto;
-    text-align: center;
-    font-size: 24px;
-}
-
-.expertise-container a {
-    display: block;
-    background-color: transparent;
-    padding: 16px;
-    border-radius: 8px;
-    margin-bottom: 16px;
-    outline: #2c677c 2px solid;
-    color: #1b404d;
-}
-
-.expertise-container a:hover {
-    background-color: #0f6272;
-    color: white;
-}
-
-/*///////////////////////////////////////////////////*/
-
 .main {
     width: 100%;
     position: relative;
@@ -51,6 +26,8 @@ a {
     aspect-ratio: 1/1;
     border-radius: 50%;
     outline: 2px solid #5e5e5e;
+    display: inline-block;
+    width: 30%;
 }
 
 
@@ -121,24 +98,6 @@ a {
     text-align: center;
 }
 
-.aside ul span {
-    color: #08778a;
-    font-size: 20px;
-}
-
-.aside ul {
-    margin-top: 22px;
-}
-
-.aside li {
-    text-indent: 5%;
-    font-size: 18px;
-    line-height: 32px;
-}
-
-.aside li a {
-    color: #159fb7;
-}
 
 .aside a:hover {
     color: #076e80;
@@ -206,4 +165,72 @@ a {
 
 .clear {
     clear: both;
+}
+
+.aside {
+    display: block;
+}
+
+.aside .information {
+    padding: 12px;
+    margin-bottom: 24px;
+    border-radius: 6px;
+}
+
+.aside .detail {
+    display: inline-block;
+    padding-right: 12px;
+}
+
+
+
+.information h1 {
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.information h2 {
+    color: #1c4a72;
+    font-size: 20px;
+    margin-bottom: 16px;
+
+}
+
+#date_input_1 {
+    width: 50%;
+    height: 32px;
+}
+
+.information .code {
+    color: #5e5e5e;
+    outline: 1px #1c4a72 dashed;
+    padding: 3px;
+    border-radius: 10px;
+}
+
+.form {
+    text-align: center;
+}
+
+.calendar {
+    /*width: 66%;*/
+    border-radius: 5px;
+    display: block;
+    margin: auto;
+}
+
+.calendar input {
+    background-color: transparent;
+    text-align: center;
+}
+
+.amount {
+    width: 64%;
+}
+
+.submit {
+    display: block;
+    margin: auto;
 }

@@ -1,9 +1,8 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block style %}
-    <link rel="stylesheet" href="{% static 'doctor/css/doctor_panel.css' %}">
-    <link rel="alternate stylesheet" type="text/css" media="all"
-          href="{% static 'doctor/js/expertise/calendar-blue.css' %}" title="winter"/>
+    <link rel="stylesheet" href="{% static 'doctor/css/doctor_expertise.css' %}">
+    <link rel="stylesheet" href="{% static 'doctor/js/expertise/calendar-blue.css' %}" title="winter"/>
     <script type="text/javascript" src="{% static 'doctor/js/expertise/jalali.js' %}"></script>
     <script type="text/javascript" src="{% static 'doctor/js/expertise/calendar.js' %}"></script>
     <script type="text/javascript" src="{% static 'doctor/js/expertise/calendar-setup.js' %}"></script>
@@ -11,7 +10,12 @@
 
 
     <style>
-
+        {#.calendar {#}
+        {#    width: 66%;#}
+        {#    border-radius: 5px;#}
+        {#    display: block;#}
+        {#    margin: auto;#}
+        {#}#}
 
     </style>
 
@@ -20,12 +24,14 @@
     <aside class="aside">
         <div class="information">
             <img class="photo" src="{{ doctor.photo.url }}" alt="doctor image">
-            <h1>{{ doctor.get_fullname }}</h1>
-            <h2>{{ doctor.expertise }}</h2>
-            <p>{{ doctor.medical_code }}</p>
-            {% if balance %}
-                <p>{{ balance }}</p>
-            {% endif %}
+            <div class="detail">
+                <h1>{{ doctor.get_fullname }}</h1>
+                <h2>{{ doctor.expertise }}</h2>
+                <div class="code"><span>کد نظام پزشکی: </span><span>{{ doctor.medical_code }}</span></div>
+                {% if balance %}
+                    <p>{{ balance }}</p>
+                {% endif %}
+            </div>
         </div>
         <div class="set-visit">
             <p class="set-visit-caption">تعریف ویزیت جدید:</p>
@@ -44,7 +50,7 @@
 
                     setActiveStyleSheet(document.getElementById("defaultTheme"), "winter");
                 </script>
-                <form method="post">
+                <form class="form" method="post">
                     {% csrf_token %}
                     <div class="calendar">
                         <label for="date_input_1"></label>
@@ -62,7 +68,7 @@
                     </div>
                     <label for="amount"></label>
                     <input name="amount" type="text" class="amount" id="amount" placeholder="هزینه ویزیت">
-                    <input class="submit" type="submit" value="ذخیره">
+                    <input class="submit" type="submit" value="ذخیره" required>
                     <script type="text/javascript">
                         Calendar.setup({
                             inputField: "date_input_1",

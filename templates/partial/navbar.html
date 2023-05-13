@@ -10,7 +10,11 @@
     </div>
     <nav class="navbar">
         <div class="menu">
-            <a href="#" class="menu-item">پشتیبانی</a>
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'message' request.user.id %}" class="menu-item">پشتیبانی</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="menu-item">پشتیبانی</a>
+            {% endif %}
             <a href="{% url 'doctor_request' %}" class="menu-item">ثبت پزشک</a>
             <a href="{% url 'contact' %}" class="menu-item">تماس با ما</a>
             <a href="{% url 'about' %}" class="menu-item">درباره ما</a>

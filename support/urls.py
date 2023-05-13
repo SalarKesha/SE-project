@@ -1,5 +1,7 @@
 from django.urls import path, include
 
-urlpatterns = [
+from support.views import message
 
+urlpatterns = [
+    path('support/<int:pk>', message, name='message')
 ]
