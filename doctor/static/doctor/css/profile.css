@@ -112,16 +112,20 @@ img {
     border-bottom: 1px #3b3b3b dashed;
     text-align: center;
 }
-
+.visit-flex{
+    display: flex;
+    flex-flow: wrap;
+}
 .visit {
     padding: 10px;
     border-radius: 8px;
     margin: 6px;
-    display: inline-block;
+    /*display: inline-block;*/
     color: #314bbb;
     background-color: rgba(37, 185, 248, 0.34);
     width: 20%;
     text-align: center;
+    /*height: 42px;*/
 }
 
 .visit:hover {

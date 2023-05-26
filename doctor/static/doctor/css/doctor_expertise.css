@@ -38,6 +38,7 @@ a {
     height: 250px;
 }
 
+
 .set-visit input {
     text-align: center;
     font-family: 'BYekan';
@@ -49,8 +50,9 @@ a {
     text-align: center;
 }
 
-.set-visit input:active {
+.set-visit input:focus {
     border: none;
+    outline: none;
 }
 
 .set-visit-caption {
@@ -67,6 +69,7 @@ a {
     height: 36px;
     margin-bottom: 20px;
     margin-top: 10px;
+    background-color: #ededfe;
 }
 
 .set-visit .amount {
@@ -74,6 +77,8 @@ a {
     padding: 4px;
     font-size: 18px;
     margin-bottom: 20px;
+    background-color: #ededfe;
+
 }
 
 .set-visit .submit {
@@ -94,7 +99,7 @@ a {
 
 .visits-container {
     float: left;
-    width: 65%;
+    width: 60%;
     text-align: center;
 }
 
@@ -183,7 +188,6 @@ a {
 }
 
 
-
 .information h1 {
     font-size: 24px;
     font-weight: bold;
@@ -205,10 +209,19 @@ a {
 
 .information .code {
     color: #5e5e5e;
-    outline: 1px #1c4a72 dashed;
+    border-bottom: 1px #1c4a72 dashed;
     padding: 3px;
-    border-radius: 10px;
+    margin-bottom: 30px;
 }
+.wallet{
+    color: #164f73;
+    outline: 2px solid #164f73;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
 
 .form {
     text-align: center;
@@ -232,5 +245,11 @@ a {
 
 .submit {
     display: block;
+    margin: auto;
+}
+
+.calendar-container {
+    width: 66%;
+    border-radius: 5px;
     margin: auto;
 }

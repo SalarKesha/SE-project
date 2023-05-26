@@ -42,13 +42,15 @@ class DoctorBalance(models.Model):
 
     @classmethod
     def record_doctor_balance(cls, doctor):
-        positive_transactions = Sum('visits__transactions__amount')
-        negative_transactions = Sum('visits__patient_visits__refunds__patient_visit__visit__amount')
-        doctor_visits = doctor.transactions.all().aggregate(
+        positive_transactions = Sum('amount')
+        negative_transactions = Sum('amount')
+        visits = doctor.visits.filter(is_taken=True)
+        doctor_visits = Transaction.objects.filter(visit__in=visits).aggregate(
             balance=Coalesce(positive_transactions, 0)
         )
-        doctor_refunds = doctor.refunds.all().aggregate(
-            balance=Coalesce(negative_transactions, 0)
-        )
-        doctor_balance = doctor_visits['balance'] - doctor_refunds['balance']
-        return doctor_balance
+        # doctor_refunds = doctor.visits.patient_visit.refunds.all().aggregate(
+        #     balance=Coalesce(negative_transactions, 0)
+        # )
+        # doctor_balance = doctor_visits['balance'] - doctor_refunds['balance']
+        # return doctor_balance
+        return doctor_visits['balance']

@@ -12,7 +12,9 @@ from doctor.models import Doctor, Request, Expertise, Visit
 from doctor.utils import fix_datetime, set_visit
 # from doctor.utils import validate
 from location.models import City
-from transaction.models import DoctorBalance
+from patient.models import Patient
+from transaction.models import DoctorBalance, Transaction
+from visit.models import PatientVisit
 
 
 def test(request):
@@ -91,8 +93,32 @@ def profile(request, pk):
         doctor = Doctor.objects.get(pk=pk)
     except Doctor.DoesNotExist:
         raise 404
-    visits = doctor.visits.all().order_by('time')
+    visits = doctor.visits.filter(is_taken=False).order_by('time')
     return render(request, 'doctor/profile.html', {'doctor': doctor, 'visits': visits})
+
+
+@login_required(login_url='/login/')
+def doctor_visit(request, pk):
+    try:
+        visit = Visit.objects.get(pk=pk)
+    except Visit.DoesNotExist:
+        raise 404
+    if request.method == "POST":
+        patient = Patient.objects.get(user_id=request.user.id)
+        transaction = Transaction.objects.create(
+            patient=patient,
+            visit=visit,
+            amount=visit.amount
+        )
+        patient_visit = PatientVisit.objects.create(
+            visit=visit,
+            patient=patient,
+            transaction=transaction
+        )
+        visit.is_taken = True
+        visit.save()
+        return redirect('patient_panel', request.user.id)
+    return render(request, 'doctor/doctor_visit.html', {'visit': visit})
 
 
 @login_required(login_url='/login/')
@@ -109,10 +135,10 @@ def doctor_expertise(request, upk, epk):
     if request.method == 'POST':
         set_visit(request, doctor)
     visits = doctor.visits.all().order_by('time')
-    try:
-        balance = DoctorBalance.record_doctor_balance(doctor=doctor)
-    except:
-        balance = False
+    # try:
+    balance = DoctorBalance.record_doctor_balance(doctor=doctor)
+    # except:
+    #     balance = False
     return render(request, 'doctor/doctor_expertise.html', {'doctor': doctor, 'visits': visits, 'balance': balance})
 
 
@@ -147,6 +173,3 @@ def doctor_request(request):
     return render(request, 'doctor/request.html',
                   {'phone_number': request.user.username, 'fname': request.user.first_name,
                    'lname': request.user.last_name})
-
-
-

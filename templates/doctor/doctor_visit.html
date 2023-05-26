@@ -1,0 +1,24 @@
+{% extends 'base/base.html' %}
+{% block style %}
+
+{% endblock %}
+{% block content %}
+    <main class="main">
+    <div class="visit_container">
+        <div class="visit-detail">
+            <p class="doctor-name">{{ visit.doctor.get_fullname }}</p>
+            <p class="doctor-expertise">{{ visit.doctor.expertise }}</p>
+            <p class="doctor-address">{{ visit.doctor.address }}</p>
+            <p class="visit-time">{{ visit }}</p>
+            <p class="visit-amount">{{ visit.amount }}</p>
+        </div>
+        <form action="" method="post" class="visit-form">
+            {% csrf_token %}
+            <input type="text" value="{{ visit.id }}" hidden="hidden" name="id">
+            <input type="submit" value="پرداخت نهایی">
+        </form>
+    </div>
+    </main>
+{% endblock %}
+
+

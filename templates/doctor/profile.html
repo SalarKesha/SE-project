@@ -49,9 +49,9 @@
         <div class="visits-container">
             <div class="caption">لیست نوبت های مطب دکتر <span>{{ doctor.get_fullname }}</span></div>
             {% if visits %}
-                <div>
+                <div class="visit-flex">
                     {% for visit in visits %}
-                        <a href="#" class="visit">{{ visit }}</a>
+                        <a href="{% url 'doctor_visit' visit.id %}" class="visit">{{ visit }}</a>
                     {% endfor %}
                 </div>
             {% else %}

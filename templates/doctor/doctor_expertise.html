@@ -1,23 +1,13 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block style %}
-    <link rel="stylesheet" href="{% static 'doctor/css/doctor_expertise.css' %}">
     <link rel="stylesheet" href="{% static 'doctor/js/expertise/calendar-blue.css' %}" title="winter"/>
     <script type="text/javascript" src="{% static 'doctor/js/expertise/jalali.js' %}"></script>
     <script type="text/javascript" src="{% static 'doctor/js/expertise/calendar.js' %}"></script>
     <script type="text/javascript" src="{% static 'doctor/js/expertise/calendar-setup.js' %}"></script>
     <script type="text/javascript" src="{% static 'doctor/js/expertise/calendar-fa.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'doctor/css/doctor_expertise.css' %}">
 
-
-    <style>
-        {#.calendar {#}
-        {#    width: 66%;#}
-        {#    border-radius: 5px;#}
-        {#    display: block;#}
-        {#    margin: auto;#}
-        {#}#}
-
-    </style>
 
 {% endblock %}
 {% block content %}
@@ -28,9 +18,13 @@
                 <h1>{{ doctor.get_fullname }}</h1>
                 <h2>{{ doctor.expertise }}</h2>
                 <div class="code"><span>کد نظام پزشکی: </span><span>{{ doctor.medical_code }}</span></div>
-                {% if balance %}
-                    <p>{{ balance }}</p>
-                {% endif %}
+                <div class="wallet">موجودی کیف پول:
+                    {% if balance %}
+                        <span>{{ balance }}<span style="font-weight: lighter"> (تومان) </span></span>
+                    {% else %}
+                        <span>0</span>
+                    {% endif %}
+                </div>
             </div>
         </div>
         <div class="set-visit">
@@ -52,12 +46,14 @@
                 </script>
                 <form class="form" method="post">
                     {% csrf_token %}
-                    <div class="calendar">
-                        <label for="date_input_1"></label>
-                        <input name="date" placeholder="تاریخ" required id="date_input_1" type="text"/><img
-                            id="date_btn_1"
-                            src="{% static 'doctor/images/cal.png' %}"
-                            style="vertical-align: top;" alt="cal"/>
+                    <div class="calendar-container">
+                        <div class="calendar">
+                            <label for="date_input_1"></label>
+                            <input name="date" placeholder="تاریخ" required id="date_input_1" type="text"/><img
+                                id="date_btn_1"
+                                src="{% static 'doctor/images/cal.png' %}"
+                                style="vertical-align: top;" alt="cal"/>
+                        </div>
                     </div>
                     <div class="time">
                         <label for="minute"></label>

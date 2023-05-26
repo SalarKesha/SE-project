@@ -43,7 +43,7 @@ class Doctor(models.Model):
         return f"{self.first_name} {self.last_name}"
 
     def get_first_visit(self):
-        fv = self.visits.order_by('time').first()
+        fv = self.visits.filter(is_taken=False, is_active=True).order_by('time').first()
         # if fv:
         #     return False
         # time = JalaliDate(fv)

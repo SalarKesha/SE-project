@@ -57,8 +57,8 @@ div.calendar {
 .calendar thead .hilite { /* How do the buttons in header appear when hover */
     background-color: #aaf;
     color: #000;
-    outline: 1px solid #04f;
-    padding: 1px;
+    /*outline: 1px solid #04f;*/
+    /*padding: 1px;*/
 }
 
 .calendar thead .active { /* Active (pressed) buttons in header */

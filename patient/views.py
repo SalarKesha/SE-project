@@ -13,9 +13,5 @@ def panel(request, pk):
         patient = Patient.objects.get(user_id=pk)
     except Patient.DoesNotExist:
         raise Http404
-
-    if patient.user != request.user:
-        raise Http404
     visits = patient.patient_visits.all()
-
     return render(request, 'patient/panel.html', {'patient': patient, 'visits': visits})
