@@ -37,7 +37,7 @@ a {
     text-align: center;
 }
 
-#number, #password, #fname, #lname, #code, #pid, #mail {
+#id_phone_number, #id_password, #id_password_confirmation, #id_first_name, #id_last_name {
     border: none;
     height: 35px;
     display: block;
@@ -53,7 +53,7 @@ a {
     outline: 1px #6b6b6b solid;
 }
 
-#number:focus, #password:focus, #fname:focus, #lname:focus {
+#id_phone_number:focus, #id_password:focus, #id_password_confirmation:focus, #id_first_name:focus, #id_last_name:focus {
     outline: 2px #495bb9 solid;
 }
 

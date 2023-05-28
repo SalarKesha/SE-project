@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.db.models import *
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
 
@@ -92,7 +92,7 @@ def profile(request, pk):
     try:
         doctor = Doctor.objects.get(pk=pk)
     except Doctor.DoesNotExist:
-        raise 404
+        raise Http404
     visits = doctor.visits.filter(is_taken=False).order_by('time')
     return render(request, 'doctor/profile.html', {'doctor': doctor, 'visits': visits})
 
@@ -101,10 +101,19 @@ def profile(request, pk):
 def doctor_visit(request, pk):
     try:
         visit = Visit.objects.get(pk=pk)
+        if visit.is_taken:
+            return HttpResponse('این نوبت توسط شخص دیگری گرفته شده است!')
     except Visit.DoesNotExist:
-        raise 404
+        raise Http404
     if request.method == "POST":
         patient = Patient.objects.get(user_id=request.user.id)
+        visit_id = request.POST.get('id')
+        try:
+            visit = Visit.objects.get(pk=visit_id)
+            if visit.is_taken:
+                raise Http404
+        except Visit.DoesNotExist:
+            raise Http404
         transaction = Transaction.objects.create(
             patient=patient,
             visit=visit,
@@ -124,13 +133,18 @@ def doctor_visit(request, pk):
 @login_required(login_url='/login/')
 # @user_passes_test(validate(request=request), login_url='/login/',)
 def doctor_panel(request, pk):
-    user = CustomUser.objects.get(id=pk)
+    user = CustomUser.objects.filter(id=pk).first()
+    if user != request.user:
+        raise Http404
     doctors = user.doctors.all()
     return render(request, 'doctor/doctor_panel.html', {'doctors': doctors})
 
 
 @login_required(login_url='/login/')
 def doctor_expertise(request, upk, epk):
+    user = CustomUser.objects.filter(id=upk).first()
+    if user != request.user:
+        raise Http404
     doctor = Doctor.objects.filter(user_id=upk, expertise_id=epk).first()
     if request.method == 'POST':
         set_visit(request, doctor)
@@ -168,7 +182,7 @@ def doctor_request(request):
             # return redirect('home')
         except:
             # messages.error(request, 'اطلاعات را به درستی وارد کنید', 'error')
-            messages.success(request, 'اطلاعات را به درستی وارد کنید', 'success')
+            messages.error(request, 'اطلاعات را به درستی وارد کنید', 'error')
 
     return render(request, 'doctor/request.html',
                   {'phone_number': request.user.username, 'fname': request.user.first_name,

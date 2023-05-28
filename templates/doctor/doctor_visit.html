@@ -1,23 +1,40 @@
 {% extends 'base/base.html' %}
+{% load static %}
 {% block style %}
-
+    <link rel="stylesheet" href="{% static 'doctor/css/doctor_visit.css' %}">
 {% endblock %}
 {% block content %}
     <main class="main">
-    <div class="visit_container">
-        <div class="visit-detail">
-            <p class="doctor-name">{{ visit.doctor.get_fullname }}</p>
-            <p class="doctor-expertise">{{ visit.doctor.expertise }}</p>
-            <p class="doctor-address">{{ visit.doctor.address }}</p>
-            <p class="visit-time">{{ visit }}</p>
-            <p class="visit-amount">{{ visit.amount }}</p>
+        <div class="visit_container">
+            <div class="visit-detail">
+                <div class="name-container">
+                    <p class="name-caption">نام پزشک: </p>
+                    <p class="doctor-name">{{ visit.doctor.get_fullname }}</p>
+                </div>
+                <div class="expertise-container">
+                    <p class="expertise-caption">تخصص: </p>
+                    <p class="doctor-expertise">{{ visit.doctor.expertise }}</p>
+                </div>
+                <div class="time-container">
+                    <p class="time-caption">زمان نوبت: </p>
+                    <p class="visit-time">{{ visit }}</p>
+                </div>
+                <div class="address-container">
+                    <p class="address-caption">آدرس مطب: </p>
+                    <p class="doctor-address">{{ visit.doctor.address }}</p>
+                </div>
+            </div>
+            <div class="payment">
+                <img class="card-img" src="{% static 'doctor/images/visitcard.png' %}" alt="visit card">
+                <p class="visit-amount">{{ visit.amount }}<span> تومان </span></p>
+                <form action="" method="post" class="visit-form">
+                    {% csrf_token %}
+                    <input type="text" value="{{ visit.id }}" hidden="hidden" name="id">
+                    <input type="submit" value="پرداخت نهایی  ->" class="submit">
+                </form>
+            </div>
+            <div class="clear"></div>
         </div>
-        <form action="" method="post" class="visit-form">
-            {% csrf_token %}
-            <input type="text" value="{{ visit.id }}" hidden="hidden" name="id">
-            <input type="submit" value="پرداخت نهایی">
-        </form>
-    </div>
     </main>
 {% endblock %}
 

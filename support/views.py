@@ -18,4 +18,4 @@ def message(request, pk):
             content=content
         )
     messages = user.messages.all()
-    return render(request, 'support/support.html', {'messages': messages})
+    return render(request, 'support/support.html', {'tickets': messages})

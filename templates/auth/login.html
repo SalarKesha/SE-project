@@ -8,26 +8,13 @@
         <div class="form-container">
             <div class="login-alert">به حساب خود وارد شوید</div>
             <div class="login-form">
-                <form method="post">
+                <form method="post" action="">
                     {% csrf_token %}
-                    {% if messages %}
-                        <ul class="messages">
-                            {% for message in messages %}
-                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                    <label for="number">
-                        <input id="number" type="number" placeholder="شماره موبایل" required autocomplete="off"
-                               name="phone_number">
-                    </label>
-                    <label for="password">
-                        <input id="password" type="password" placeholder="رمز عبور" required name="password">
-                    </label>
+                    {{ form.as_p }}
                     <input type="submit" class="submit" value="ورود">
                 </form>
                 <div class="redirect">
-                    <a href="#" class="forget">فراموشی رمز عبور</a>
+                    <a href="{% url 'forgot_password' %}" class="forget">فراموشی رمز عبور</a>
                     <span>|</span>
                     <a href="{% url 'signup' %}" class="signup">ثبت نام</a>
                 </div>

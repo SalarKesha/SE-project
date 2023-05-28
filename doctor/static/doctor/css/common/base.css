@@ -1,3 +1,9 @@
+@font-face {
+    font-family: BYekan;
+    src: url("/media/fonts/shabnam/Farsi-Digits/Shabnam-FD.eot") format('eot'),
+    url("/media/fonts/shabnam/Farsi-Digits/Shabnam-FD.woff") format('woff'),
+    url("/media/fonts/shabnam/Farsi-Digits/Shabnam-FD.ttf") format('truetype');
+}
 
 .body {
     direction: rtl;
@@ -22,6 +28,42 @@ img {
 
 a {
     text-decoration: none !important;
+}
+
+.alert-container {
+    display: none;
+    z-index: 1000;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 2vh;
+}
+
+.alert-container .success {
+    width: 26%;
+    outline: 2px #75ad73 solid;
+    border-radius: 8px;
+    padding: 30px;
+    background-color: #c1eac0;
+    color: #437a41;
+    margin: auto;
+    font-size: 20px;
+    font-weight: bold;
+}
+.alert-container .error {
+    width: 26%;
+    outline: 2px #ad7373 solid;
+    border-radius: 8px;
+    padding: 30px;
+    background-color: #eac0c0;
+    color: #7a4141;
+    margin: auto;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.show-alert {
+    display: block;
 }
 
 .header {
@@ -51,23 +93,27 @@ a {
     float: right;
     text-align: center;
 }
-.logo-container:hover{
+
+.logo-container:hover {
     opacity: 0.7;
     transition-duration: 300ms;
 }
-.logo-container a{
+
+.logo-container a {
     display: block;
 }
 
-.logo-p{
+.logo-p {
     width: 60%;
     margin: auto;
     /*background-color: #c7c7c7;*/
 }
-.logo-i{
+
+.logo-i {
     width: 85%;
     margin: auto;
 }
+
 .logo h1 {
     font-size: 18px;
     color: #549fbe;
@@ -107,7 +153,8 @@ a {
     color: #b2b2b2;
     transition-duration: 300ms;
 }
-.account-container{
+
+.account-container {
     display: inline-block;
     float: left;
     /*border-radius: 5px;*/
@@ -121,6 +168,7 @@ a {
     /*background-position: 6px;*/
     /*padding: 3px;*/
 }
+
 .login-container {
     display: inline-block;
     float: left;
@@ -157,7 +205,7 @@ a {
     transition-duration: 400ms;
 }
 
-.name-btn{
+.name-btn {
     display: inline-block;
     border-radius: 5px;
     width: 80%;
@@ -171,12 +219,14 @@ a {
     padding: 3px;
     letter-spacing: 1px;
 }
-.logout{
+
+.logout {
     display: inline-block;
     vertical-align: -6px;
     /*background-color: #006a98;*/
 }
-.logout:hover{
+
+.logout:hover {
     transform: scale(1.2);
     transition-duration: 300ms;
 }
@@ -202,13 +252,9 @@ a {
     clear: both;
 }
 
-/*.alert{*/
-/*    width: 50%;*/
-/*    outline: 1px green solid;*/
-/*    border-radius: 15px;*/
-/*    text-align: center;*/
-/*    position: absolute;*/
-/*    top: 20vh;*/
-/*    padding: 20px;*/
-/*    background-color: rgba(70, 204, 90, 0.34);*/
-/*}*/
+.errorlist li{
+    color: red;
+    font-size: 14px;
+    max-width: 100%;
+    text-align: center;
+}
