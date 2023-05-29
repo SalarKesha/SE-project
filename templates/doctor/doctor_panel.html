@@ -7,6 +7,7 @@
     </style>
 {% endblock %}
 {% block content %}
+        <a class="patient" href="{% url 'patient_panel' patient.id %}">پنل بیمار</a>
     {% for doctor in doctors %}
         <div class="expertise-container">
             <a href="{% url 'doctor_expertise' epk=doctor.expertise_id upk=doctor.user_id %}">

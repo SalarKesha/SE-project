@@ -16,6 +16,7 @@ a {
     /*height: 500px;*/
     border-radius: 8px 0 0 8px;
     display: inline-block;
+    float: right;
     /*outline: #159fb7 1px solid;*/
 }
 
@@ -62,9 +63,14 @@ li a:hover {
 .content {
     height: 400px;
     display: inline-block;
+    float: left;
     text-align: center;
     width: 80%;
 
+}
+.non-caption{
+    font-size: 32px;
+    color: #808080;
 }
 table{
     margin: auto;

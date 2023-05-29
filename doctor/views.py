@@ -6,20 +6,13 @@ from django.db.models import *
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
-
 from account.models import CustomUser
 from doctor.models import Doctor, Request, Expertise, Visit
 from doctor.utils import fix_datetime, set_visit
-# from doctor.utils import validate
 from location.models import City
 from patient.models import Patient
 from transaction.models import DoctorBalance, Transaction
 from visit.models import PatientVisit
-
-
-def test(request):
-    password = CustomUser.objects.make_random_password(length=8)
-    return HttpResponse(password)
 
 
 class DoctorListView(ListView):
@@ -137,7 +130,7 @@ def doctor_panel(request, pk):
     if user != request.user:
         raise Http404
     doctors = user.doctors.all()
-    return render(request, 'doctor/doctor_panel.html', {'doctors': doctors})
+    return render(request, 'doctor/doctor_panel.html', {'doctors': doctors, 'patient': user})
 
 
 @login_required(login_url='/login/')

@@ -5,8 +5,6 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 
 from account.views import signup, login_user, logout_user, forget_password
-
-# from account.views import test
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('doctor/', include('doctor.urls')),
@@ -24,5 +22,4 @@ urlpatterns = [
                   path('login/', login_user, name='login'),
                   path('logout/', logout_user, name='logout'),
                   path('forgot_password/', forget_password, name='forgot_password'),
-                  # path('test/', test, name='test'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

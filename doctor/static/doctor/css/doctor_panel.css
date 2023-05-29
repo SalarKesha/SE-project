@@ -204,6 +204,24 @@ a {
     /*border-bottom: #313131 1px solid;*/
 }
 
+.patient{
+    font-size: 24px;
+    outline: 2px solid #0e2b3b;
+    color: #0e2b3b;
+    border-radius: 4px;
+    width: 12%;
+    text-align: center;
+    padding: 6px;
+    margin-right: 5%;
+    background-color: rgba(28, 173, 200, 0.32);
+    display: block;
+}
+.patient:hover{
+    background-color: rgba(28, 173, 200, 0.53);
+    transition-duration: 350ms;
+}
+
+
 .clear {
     clear: both;
 }

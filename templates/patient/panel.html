@@ -25,38 +25,43 @@
             <div class="logout-container"><a class="logout-panel" href="{% url 'logout' %}">خروج از حساب</a></div>
         </aside>
         <div class="content">
-            <table>
-                <thead>
-                <tr>
-                    <th>کد ویزیت</th>
-                    <th>زمان</th>
-                    <th>عنوان تخصص</th>
-                    <th>نام پزشک</th>
-                    <th>شماره مطب</th>
-                    <th>آدرس مطب</th>
-                    <th>وضعیت</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for visit in visits %}
+            {% if visits %}
+                <table>
+                    <thead>
                     <tr>
-                        <td>{{ visit.visit.id }} -</td>
-                        <td>{{ visit.visit }}</td>
-                        <td>{{ visit.visit.doctor.expertise }}</td>
-                        <td>{{ visit.visit.doctor.get_fullname }}</td>
-                        <td>{{ visit.visit.doctor.office_number }}</td>
-                        <td>{{ visit.visit.doctor.address }}</td>
-                        {% if visit.condition == 1 %}
-                            <td>در انتظار</td>
-                        {% elif visit.condition == 2 %}
-                            <td>ویزیت شده</td>
-                        {% else %}
-                            <td>عودت داده شده</td>
-                        {% endif %}
+                        <th>کد ویزیت</th>
+                        <th>زمان</th>
+                        <th>عنوان تخصص</th>
+                        <th>نام پزشک</th>
+                        <th>شماره مطب</th>
+                        <th>آدرس مطب</th>
+                        <th>وضعیت</th>
                     </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {% for visit in visits %}
+                        <tr>
+                            <td>{{ visit.visit.id }} -</td>
+                            <td>{{ visit.visit }}</td>
+                            <td>{{ visit.visit.doctor.expertise }}</td>
+                            <td>{{ visit.visit.doctor.get_fullname }}</td>
+                            <td>{{ visit.visit.doctor.office_number }}</td>
+                            <td>{{ visit.visit.doctor.address }}</td>
+                            {% if visit.condition == 1 %}
+                                <td>در انتظار</td>
+                            {% elif visit.condition == 2 %}
+                                <td>ویزیت شده</td>
+                            {% else %}
+                                <td>عودت داده شده</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="non-caption">هیچ نوبتی گرفته نشده است</p>
+            {% endif %}
         </div>
+        <div class="clear"></div>
     </main>
 {% endblock %}

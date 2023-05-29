@@ -4,6 +4,10 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from khayyam import *
+import os.path
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # from account.models import CustomUser
 from location.models import City
@@ -37,7 +41,8 @@ class Doctor(models.Model):
     is_active = models.BooleanField(default=True)
     created_time = models.DateTimeField(auto_now_add=True)
     modified_time = models.DateTimeField(auto_now=True)
-    photo = models.ImageField(blank=True, null=True, upload_to='doctors/')
+    photo = models.ImageField(blank=True, null=True, upload_to='doctors/',
+                              default=os.path.join(BASE_DIR, 'media/icons/defdoc.png'))
 
     def get_fullname(self):
         return f"{self.first_name} {self.last_name}"

@@ -26,7 +26,7 @@
             </div>
             <div class="payment">
                 <img class="card-img" src="{% static 'doctor/images/visitcard.png' %}" alt="visit card">
-                <p class="visit-amount">{{ visit.amount }}<span> تومان </span></p>
+                <p class="visit-amount">{{ visit.amount }}<span style="font-size: 12px"> تومان </span></p>
                 <form action="" method="post" class="visit-form">
                     {% csrf_token %}
                     <input type="text" value="{{ visit.id }}" hidden="hidden" name="id">

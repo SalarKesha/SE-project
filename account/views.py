@@ -144,11 +144,12 @@ def forget_password(request):
             phone_number = cd['phone_number']
             new_password = CustomUser.objects.make_random_password(length=8)
             try:
-                user = CustomUser.objects.get(username=phone_number)
-                user.set_password(new_password)
-                user.save()
-                send_code(phone_number, new_password)
-                messages.success(request, 'رمز عبور جدید به شماره موبایل پیامک شد', 'success')
+                with transaction.atomic():
+                    user = CustomUser.objects.get(username=phone_number)
+                    user.set_password(new_password)
+                    user.save()
+                    send_code(phone_number, new_password)
+                    messages.success(request, 'رمز عبور جدید به شماره موبایل پیامک شد', 'success')
             except CustomUser.DoesNotExist:
                 messages.error(request, 'شماره موبایل در سامانه ثبت نشده است!', 'error')
                 return redirect('forgot_password')
