@@ -17,7 +17,7 @@ def accept(modeladmin, request, queryset):
         # )
         # send_notif(user.username, user.password)
         user = CustomUser.objects.get(username=req.phone_number)
-        Doctor.objects.create(
+        doctor = Doctor.objects.create(
             user=user,
             first_name=req.first_name,
             last_name=req.last_name,
@@ -29,8 +29,10 @@ def accept(modeladmin, request, queryset):
             email=req.email,
             city=req.city,
             address=req.address,
-            photo=req.photo
         )
+        if req.photo:
+            doctor.photo = req.photo
+        doctor.save()
         user.role = 2
         user.save()
 

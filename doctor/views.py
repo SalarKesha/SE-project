@@ -174,7 +174,6 @@ def doctor_request(request):
             messages.success(request, 'درخواست با موفقیت ثبت شد', 'success')
             # return redirect('home')
         except:
-            # messages.error(request, 'اطلاعات را به درستی وارد کنید', 'error')
             messages.error(request, 'اطلاعات را به درستی وارد کنید', 'error')
 
     return render(request, 'doctor/request.html',
